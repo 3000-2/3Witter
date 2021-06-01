@@ -1,0 +1,55 @@
+.home {
+  display: flex;
+  height: 100vh;
+}
+
+.header,
+.main,
+.side {
+  height: inherit;
+}
+
+.header {
+  width: 15%;
+  background-color: lavenderblush;
+}
+
+.logo {
+  width: 48px;
+  height: 48px;
+}
+
+.headerList .btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  border: none;
+  background-color: transparent;
+  font-size: 1.5rem;
+  border-radius: 8px;
+  padding: 10px;
+  transition: 250ms;
+}
+
+.headerList .btn:hover {
+  cursor: pointer;
+  background-color: white;
+}
+
+.icon {
+  width: 28px;
+  height: 28px;
+  margin: 0 16px;
+}
+
+.main {
+  width: 65%;
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+}
+
+.side {
+  width: 20%;
+  background-color: lightcoral;
+}
