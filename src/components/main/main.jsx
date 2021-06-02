@@ -1,15 +1,23 @@
 import React from "react";
+import Twit from "../twit/twit";
 import styles from "./main.module.css";
 
 const Main = () => {
+  const other = true;
   return (
-    <div className={styles.main}>
+    <>
       <header className={styles.header}>
         <h1>홈</h1>
       </header>
-      <div className={styles.twit}>트윗하기</div>
-      <div>목록</div>
-    </div>
+      <div className={styles.main}>
+        <Twit />
+        <ul>
+          <li>
+            <Twit other={other} />
+          </li>
+        </ul>
+      </div>
+    </>
   );
 };
 

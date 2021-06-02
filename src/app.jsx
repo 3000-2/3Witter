@@ -4,16 +4,16 @@ import "./app.css";
 import Home from "./components/home/home";
 import Signup from "./components/signup/signup";
 
-function App() {
+function App({ authService }) {
   return (
     <>
       <Router>
         <Switch>
           <Route exact path="/">
-            <Signup />
+            <Signup authService={authService} />
           </Route>
           <Route exact path="/home">
-            <Home />
+            <Home authService={authService} />
           </Route>
         </Switch>
       </Router>

@@ -1,5 +1,6 @@
 .home {
   display: flex;
+  justify-content: center;
   height: 100vh;
 }
 
@@ -10,8 +11,9 @@
 }
 
 .header {
-  width: 15%;
+  width: 20%;
   background-color: lavenderblush;
+  position: relative;
 }
 
 .logo {
@@ -43,8 +45,32 @@
   margin: 0 16px;
 }
 
+.profile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  bottom: 20px;
+  width: 100%;
+  background-color: rgb(185, 185, 185);
+  position: absolute;
+}
+
+.profileImg {
+  display: block;
+  width: 48px;
+  height: 48px;
+  margin-right: 10px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.profile .text {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
 .main {
-  width: 65%;
+  width: 600px;
   border-left: 1px solid #ddd;
   border-right: 1px solid #ddd;
 }

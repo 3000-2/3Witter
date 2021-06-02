@@ -1,14 +1,11 @@
 .main {
   display: flex;
   flex-direction: column;
+  padding: 0 20px;
 }
 
 .header {
   background-color: yellowgreen;
   border-bottom: 1px solid #ddd;
-}
-
-.twit {
-  height: 300px;
-  background-color: yellow;
+  padding: 5px 10px;
 }
