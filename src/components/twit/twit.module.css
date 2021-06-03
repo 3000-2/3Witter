@@ -1,18 +1,17 @@
 .twit {
   display: flex;
-  height: 200px;
   width: 100%;
   padding: 10px;
   margin: 10px 0;
-  background-color: yellow;
+  background-color: #f3f3ee;
 }
 
-.user {
+.profile {
   width: 48px;
   height: 100%;
 }
 
-.user img {
+.profileImg {
   width: 100%;
 }
 
@@ -22,50 +21,29 @@
   padding: 0 10px;
 }
 
-.twitForm input {
-  display: block;
-  width: 100%;
-  height: 60px;
-  padding: 10px;
-  font-size: 1.2rem;
+.name {
+  font-size: 1rem;
 }
 
 .serviceForm {
   display: flex;
-  margin: 10px 0;
   padding: 10px 0;
   border-top: 1px solid #ddd;
   position: relative;
 }
 
-input,
+.serviceForm .icon {
+  width: 32px;
+  height: 32px;
+  color: #eec7c6;
+}
+
+.serviceForm .icon:hover {
+  cursor: pointer;
+}
+
 .serviceBtn,
 .btn {
   border: none;
   background-color: transparent;
-}
-
-.serviceForm .serviceBtn {
-  width: 48px;
-  height: 48px;
-}
-.serviceForm .serviceBtn img {
-  width: 100%;
-  object-fit: contain;
-}
-
-.serviceForm .btn {
-  width: 120px;
-  position: absolute;
-  font-size: 1.3rem;
-  background-color: #f3f3ee;
-  padding: 10px 15px;
-  border-radius: 24px;
-  right: 10px;
-  transition: 250ms;
-}
-
-.serviceForm .btn:hover {
-  cursor: pointer;
-  transform: scale(1.04);
 }

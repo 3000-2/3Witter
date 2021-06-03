@@ -1,39 +1,37 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import Swal from "sweetalert2";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
 
 import FriendsList from "../friendslist/friendslist";
 import Main from "../main/main";
 import Profile from "../profile/profile";
 import styles from "./home.module.css";
+import Header from "../header/header";
 
-const Home = ({ authService }) => {
+// dayjs 초기화
+dayjs.extend(relativeTime);
+
+const Home = ({ authService, repository }) => {
   const history = useHistory();
-  const [page, Setpage] = useState("Main");
-  const [user, Setuser] = useState({});
-
-  const userDes = [
-    {
-      id: 123,
-      name: "3002",
-      email: "3002@gmail.com",
-      imageURL: "",
-      des: "안녕",
-    },
-  ];
+  const [page, setPage] = useState("Main");
+  const [user, setUser] = useState({});
+  const [twit, setTwit] = useState();
+  const today = dayjs().format("YYYYMMDD");
 
   const ChangePageHandle = (e) => {
     const page = e.currentTarget.textContent;
     e.preventDefault();
     switch (page) {
       case "친구":
-        Setpage("FriendsList");
+        setPage("FriendsList");
         break;
       case "프로필":
-        Setpage("Profile");
+        setPage("Profile");
         break;
       default:
-        Setpage("Main");
+        setPage("Main");
     }
   };
 
@@ -44,53 +42,59 @@ const Home = ({ authService }) => {
     authService.logout();
   };
 
+  const SubmitHandle = (Twit) => {
+    repository.saveTwit(user.uid, Twit, today);
+    const updated = { ...twit };
+    const time = today + Twit.time;
+    updated[time] = Twit;
+
+    console.log("업데이트 : ", updated);
+    setTwit(updated);
+  };
+
   useEffect(() => {
     authService.onAuthChanged((user) => {
       if (user) {
-        Setuser(user);
+        setUser(user);
       } else {
         history.push("/");
       }
     });
   }, [authService]);
 
+  useEffect(() => {
+    const stopSync = repository.syncAllTwit((Twit) => {
+      // console.log("트윗 : ", Twit);
+      const updated = {};
+      Object.values(Twit).map((values) => {
+        Object.keys(values).map((key) => {
+          // console.log("밸류 : ", values[key]);
+          updated[key] = { ...values[key] };
+        });
+        // updated = { ...value };
+      });
+      console.log("updated : ", updated);
+      setTwit(updated);
+    });
+    return () => stopSync();
+  }, [repository]);
+
+  const GoHome = () => {
+    history.push("/");
+  };
+
   return (
     <div className={styles.home}>
-      <header className={styles.header}>
-        <img className={styles.logo} src="/images/logo.png" />
-        <ul>
-          <li className={styles.headerList}>
-            <button className={styles.btn} onClick={ChangePageHandle}>
-              <img className={styles.icon} src="/images/icon/agenda.png" />
-              친구
-            </button>
-          </li>
-          <li className={styles.headerList}>
-            <button className={styles.btn} onClick={ChangePageHandle}>
-              <img className={styles.icon} src="/images/icon/heart.png" />
-              좋아요
-            </button>
-          </li>
-          <li className={styles.headerList}>
-            <button className={styles.btn} onClick={ChangePageHandle}>
-              <img className={styles.icon} src="/images/icon/user.png" />
-              프로필
-            </button>
-          </li>
-        </ul>
-        <div className={styles.profile}>
-          <img className={styles.profileImg} src="/images/logo.png" />
-          <div className={styles.contents}>
-            <div className={styles.text}>{user.displayName}</div>
-            <div className={styles.text}>{user.email}</div>
-          </div>
-          <button className={styles.btn} onClick={LogoutHandle}>
-            로그아웃
-          </button>
-        </div>
-      </header>
+      <Header
+        user={user}
+        GoHome={GoHome}
+        LogoutHandle={LogoutHandle}
+        ChangePageHandle={ChangePageHandle}
+      />
       <div className={styles.main}>
-        {page === "Main" && <Main />}
+        {page === "Main" && (
+          <Main user={user} twit={twit} SubmitHandle={SubmitHandle} />
+        )}
         {page === "Profile" && <Profile />}
         {page === "FriendsList" && <FriendsList />}
       </div>

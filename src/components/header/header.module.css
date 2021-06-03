@@ -1,12 +1,4 @@
-.home {
-  display: flex;
-  justify-content: center;
-  height: 100vh;
-}
-
-.header,
-.main,
-.side {
+.header {
   height: inherit;
 }
 
@@ -55,13 +47,27 @@
   margin: 0 16px;
 }
 
-.main {
-  width: 600px;
-  border-left: 1px solid #ddd;
-  border-right: 1px solid #ddd;
+.profile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  bottom: 20px;
+  padding: 10px;
+  width: 100%;
+  background-color: rgb(185, 185, 185);
+  position: absolute;
 }
 
-.side {
-  width: 20%;
-  background-color: lightcoral;
+.profileImg {
+  display: block;
+  width: 48px;
+  height: 48px;
+  margin-right: 10px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.profile .text {
+  font-size: 0.9rem;
+  font-weight: 600;
 }

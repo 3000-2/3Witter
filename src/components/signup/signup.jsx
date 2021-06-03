@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import styles from "./signup.module.css";
 
-const Signup = ({ authService }) => {
+const Signup = ({ authService, repository }) => {
   const history = useHistory();
   const onClick = (e) => {
     e.preventDefault();
@@ -14,7 +14,7 @@ const Signup = ({ authService }) => {
       .login(provider)
       .then((result) => {
         console.log(result);
-        onLogin(result.user.uid);
+        onLogin(result.user);
       })
       .catch((error) => {
         console.error("error : ", error);
@@ -30,6 +30,14 @@ const Signup = ({ authService }) => {
   }, [authService]);
 
   const onLogin = (user) => {
+    repository.setProfile(user, () => {
+      repository.saveProfile({
+        uid: user.uid,
+        name: user.displayName || "",
+        email: user.email,
+        imageURL: "",
+      });
+    });
     history.push({
       pathname: "home",
     });
@@ -45,11 +53,11 @@ const Signup = ({ authService }) => {
   };
   return (
     <div className={styles.signupContainer}>
-      <div className={styles.header}>
+      <header className={styles.header}>
         <img className={styles.logo} src="/images/logo.png" />
         <h1>3Witter에 오신 것을 환영합니다!</h1>
         <h2>새로운 소식이 당신을 기다리고 있습니다.</h2>
-      </div>
+      </header>
       <div>
         <button className={styles.btn} onClick={onClick}>
           E-mail로 시작하기
@@ -61,16 +69,7 @@ const Signup = ({ authService }) => {
           Twitter로 시작하기
         </button>
       </div>
-      <div className={styles.footer}>
-        Icons made by{" "}
-        <a href="https://www.freepik.com" title="Freepik">
-          Freepik
-        </a>{" "}
-        from{" "}
-        <a href="https://www.flaticon.com/" title="Flaticon">
-          www.flaticon.com
-        </a>
-      </div>
+      <footer className={styles.footer}>3002</footer>
     </div>
   );
 };

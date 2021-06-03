@@ -4,16 +4,16 @@ import "./app.css";
 import Home from "./components/home/home";
 import Signup from "./components/signup/signup";
 
-function App({ authService }) {
+function App({ authService, repository }) {
   return (
     <>
       <Router>
         <Switch>
           <Route exact path="/">
-            <Signup authService={authService} />
+            <Signup authService={authService} repository={repository} />
           </Route>
           <Route exact path="/home">
-            <Home authService={authService} />
+            <Home authService={authService} repository={repository} />
           </Route>
         </Switch>
       </Router>
