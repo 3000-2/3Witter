@@ -9,6 +9,7 @@ import Main from "../main/main";
 import Profile from "../profile/profile";
 import styles from "./home.module.css";
 import Header from "../header/header";
+import Userlist from "../userlist/userlist";
 
 // dayjs 초기화
 dayjs.extend(relativeTime);
@@ -17,6 +18,7 @@ const Home = ({ authService, repository }) => {
   const history = useHistory();
   const [page, setPage] = useState("Main");
   const [user, setUser] = useState({});
+  const [profile, setProfile] = useState({});
   const [twit, setTwit] = useState();
   const today = dayjs().format("YYYYMMDD");
 
@@ -63,36 +65,42 @@ const Home = ({ authService, repository }) => {
   }, [authService]);
 
   useEffect(() => {
-    SyncTwit();
     SyncProfile();
+    SyncTwit();
   }, [repository]);
 
   const SyncTwit = () => {
     const stopSync = repository.syncAllTwit((Twit) => {
-      // console.log("트윗 : ", Twit);
       const updated = {};
-      Object.values(Twit).map((values) => {
-        Object.keys(values).map((key) => {
-          // console.log("밸류 : ", values[key]);
+      const sorted = {};
+
+      // 데이터 정리
+      Object.values(Twit).forEach((values) => {
+        Object.keys(values).forEach((key) => {
           updated[key] = { ...values[key] };
         });
-        // updated = { ...value };
       });
-      console.log("updated : ", updated);
-      setTwit(updated);
+
+      // 데이터 정렬
+      Object.keys(updated)
+        .sort()
+        .forEach((key) => {
+          sorted[key] = updated[key];
+        });
+
+      setTwit(sorted);
     });
     return () => stopSync();
   };
 
   const SyncProfile = () => {
     const stopSync = repository.syncProfile((Profile) => {
-      console.log("프로필 : ", Profile);
       const updated = {};
-      Object.keys(Profile).map((key) => {
-        console.log("value : ", Profile[key]);
+      Object.keys(Profile).forEach((key) => {
         updated[Profile[key].profile.uid] = { ...Profile[key].profile };
       });
-      console.log("updated : ", updated);
+      // console.log("updated : ", updated);
+      setProfile(updated);
     });
     return () => stopSync();
   };
@@ -111,14 +119,17 @@ const Home = ({ authService, repository }) => {
       />
       <div className={styles.main}>
         {page === "Main" && (
-          <Main user={user} twit={twit} SubmitHandle={SubmitHandle} />
+          <Main
+            user={user}
+            twit={twit}
+            profile={profile}
+            SubmitHandle={SubmitHandle}
+          />
         )}
         {page === "Profile" && <Profile />}
         {page === "FriendsList" && <FriendsList />}
       </div>
-      <div className={styles.side}>
-        <div className={styles.sideWrap}>사용자</div>
-      </div>
+      <Userlist profile={profile} />
     </div>
   );
 };

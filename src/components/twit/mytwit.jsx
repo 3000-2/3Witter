@@ -15,10 +15,7 @@ const Mytwit = ({ user, SubmitHandle }) => {
     const date = Date.now();
     const twit = {
       uid,
-      name: displayName || "이름",
       time: date,
-      email: email || "이메일",
-      imageURL: "",
       text,
     };
     SubmitHandle(twit);

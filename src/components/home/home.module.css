@@ -4,26 +4,10 @@
   height: 100vh;
 }
 
-.main,
-.side,
-.sideWrap {
+.main {
   height: inherit;
 }
 
 .main {
   width: 600px;
-}
-
-.side {
-  width: 20%;
-  background-color: lightcoral;
-  position: relative;
-}
-
-.sideWrap {
-  width: inherit;
-  height: inherit;
-  /* position: fixed; */
-  background-color: lightcoral;
-  border-left: 1px solid #ddd;
 }
