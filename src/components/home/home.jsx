@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import Swal from "sweetalert2";
-import dayjs from "dayjs";
-import relativeTime from "dayjs/plugin/relativeTime";
 
 import FriendsList from "../friendslist/friendslist";
 import Main from "../main/main";
@@ -10,9 +8,7 @@ import Profile from "../profile/profile";
 import styles from "./home.module.css";
 import Header from "../header/header";
 import Userlist from "../userlist/userlist";
-
-// dayjs 초기화
-dayjs.extend(relativeTime);
+import Favorite from "../favorite/favorite";
 
 const Home = ({ authService, repository }) => {
   const history = useHistory();
@@ -20,7 +16,7 @@ const Home = ({ authService, repository }) => {
   const [user, setUser] = useState({});
   const [profile, setProfile] = useState({});
   const [twit, setTwit] = useState();
-  const today = dayjs().format("YYYYMMDD");
+  const [favorite, setFavorite] = useState();
 
   const ChangePageHandle = (e) => {
     const page = e.currentTarget.textContent;
@@ -31,6 +27,9 @@ const Home = ({ authService, repository }) => {
         break;
       case "프로필":
         setPage("Profile");
+        break;
+      case "좋아요":
+        setPage("Favorite");
         break;
       default:
         setPage("Main");
@@ -45,13 +44,22 @@ const Home = ({ authService, repository }) => {
   };
 
   const SubmitHandle = (Twit) => {
-    repository.saveTwit(user.uid, Twit, today);
+    repository.saveTwit(user.uid, Twit);
     const updated = { ...twit };
-    const time = today + Twit.time;
-    updated[time] = Twit;
+    updated[Twit.time] = Twit;
 
-    console.log("업데이트 : ", updated);
     setTwit(updated);
+  };
+
+  const DeleteHandle = (Twit) => {
+    repository.deleteTwit(Twit);
+    const updated = { ...twit };
+    delete updated[Twit.time];
+    setTwit(updated);
+  };
+
+  const FavoriteHandle = (uid) => {
+    repository.saveFavorite(user, uid);
   };
 
   useEffect(() => {
@@ -67,7 +75,7 @@ const Home = ({ authService, repository }) => {
   useEffect(() => {
     SyncProfile();
     SyncTwit();
-  }, [repository]);
+  }, []);
 
   const SyncTwit = () => {
     const stopSync = repository.syncAllTwit((Twit) => {
@@ -95,12 +103,12 @@ const Home = ({ authService, repository }) => {
 
   const SyncProfile = () => {
     const stopSync = repository.syncProfile((Profile) => {
-      const updated = {};
+      const updatedProfile = {};
       Object.keys(Profile).forEach((key) => {
-        updated[Profile[key].profile.uid] = { ...Profile[key].profile };
+        updatedProfile[Profile[key].profile.uid] = { ...Profile[key] };
       });
-      // console.log("updated : ", updated);
-      setProfile(updated);
+      console.log(updatedProfile);
+      setProfile(updatedProfile);
     });
     return () => stopSync();
   };
@@ -124,10 +132,13 @@ const Home = ({ authService, repository }) => {
             twit={twit}
             profile={profile}
             SubmitHandle={SubmitHandle}
+            DeleteHandle={DeleteHandle}
+            FavoriteHandle={FavoriteHandle}
           />
         )}
         {page === "Profile" && <Profile />}
         {page === "FriendsList" && <FriendsList />}
+        {page === "Favorite" && <Favorite />}
       </div>
       <Userlist profile={profile} />
     </div>

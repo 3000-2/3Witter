@@ -1,8 +1,8 @@
 import { firebaseDB } from "./firebase";
 
 class Repository {
-  saveTwit(uid, Twit, today) {
-    firebaseDB.ref(`twits/${uid}/${today}${Twit.time}`).set(Twit);
+  saveTwit(uid, Twit) {
+    firebaseDB.ref(`twits/${uid}/${Twit.time}`).set(Twit);
   }
 
   syncAllTwit(onUpdate) {
@@ -13,6 +13,10 @@ class Repository {
       Twit && onUpdate(Twit);
     });
     return () => ref.off();
+  }
+
+  deleteTwit(Twit) {
+    firebaseDB.ref(`twits/${Twit.uid}/${Twit.time}`).remove();
   }
 
   saveProfile(user) {
@@ -37,6 +41,10 @@ class Repository {
       if (!Profile) onUpdate();
     });
     return () => ref.off();
+  }
+
+  saveFavorite(user, uid) {
+    firebaseDB.ref(`user/${user.uid}/favorite/${uid}`).set(uid);
   }
 }
 

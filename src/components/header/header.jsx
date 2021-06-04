@@ -17,6 +17,7 @@ const Header = ({ user, GoHome, ChangePageHandle, LogoutHandle }) => {
             className={styles.logo}
             src="/images/logo.png"
             onClick={GoHome}
+            alt="logo"
           />
           <li className={styles.headerList}>
             <button className={styles.btn} onClick={ChangePageHandle}>
@@ -44,7 +45,7 @@ const Header = ({ user, GoHome, ChangePageHandle, LogoutHandle }) => {
           </li>
         </ul>
         <div className={styles.profile}>
-          <img className={styles.profileImg} src="/images/logo.png" />
+          <img className={styles.profileImg} src="/images/logo.png" alt="img" />
           <div className={styles.contents}>
             <div className={styles.text}>{user.displayName}</div>
             <div className={styles.text}>{user.email}</div>

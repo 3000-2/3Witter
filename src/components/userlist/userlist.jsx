@@ -2,7 +2,6 @@ import React from "react";
 import styles from "./userlist.module.css";
 
 const Userlist = ({ profile }) => {
-  console.log(profile);
   return (
     <div className={styles.side}>
       <ul>
@@ -10,7 +9,7 @@ const Userlist = ({ profile }) => {
         {profile &&
           Object.keys(profile).map((key) => (
             <li key={key}>
-              <div>{profile[key].name}</div>
+              <div>{profile[key].profile.name}</div>
             </li>
           ))}
       </ul>

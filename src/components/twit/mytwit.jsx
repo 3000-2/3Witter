@@ -2,29 +2,37 @@ import React, { useRef, useState } from "react";
 import { Editor } from "react-editor";
 import { faImage } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
 
 import styles from "./mytwit.module.css";
+
+// dayjs 초기화
+dayjs.extend(relativeTime);
 
 const Mytwit = ({ user, SubmitHandle }) => {
   const [text, setText] = useState("");
   const ref = useRef();
-  const { uid, displayName, email } = user;
+  const { uid } = user;
+  const today = dayjs().format("YYYYMMDD");
 
   const onClick = (e) => {
     e.preventDefault();
     const date = Date.now();
+    const time = today + date;
     const twit = {
       uid,
-      time: date,
+      time,
       text,
     };
     SubmitHandle(twit);
+    // ref.current.reset();
   };
 
   return (
     <div className={styles.twit}>
       <div className={styles.profile}>
-        <img className={styles.profileImg} src="/images/logo.png" />
+        <img className={styles.profileImg} src="/images/logo.png" alt="img" />
       </div>
       <div className={styles.twitForm}>
         <Editor

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useHistory } from "react-router";
 import styles from "./signup.module.css";
 
@@ -49,12 +49,13 @@ const Signup = ({ authService, repository }) => {
         return "Google";
       case "T":
         return "Twitter";
+      default:
     }
   };
   return (
     <div className={styles.signupContainer}>
       <header className={styles.header}>
-        <img className={styles.logo} src="/images/logo.png" />
+        <img className={styles.logo} src="/images/logo.png" alt="logo" />
         <h1 className={styles.title}>3Witter에 오신 것을 환영합니다!</h1>
         <h2 className={styles.title}>
           새로운 소식이 당신을 기다리고 있습니다.

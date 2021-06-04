@@ -21,6 +21,16 @@
   padding: 0 10px;
 }
 
+.contents {
+  position: relative;
+}
+
+.contents .icon {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+}
+
 .text {
   font-size: 1rem;
   padding: 10px 0;
@@ -40,15 +50,21 @@
 .serviceForm .icon {
   width: 24px;
   height: 24px;
-  color: #eec7c6;
-}
-
-.serviceForm .icon:hover {
-  cursor: pointer;
 }
 
 .serviceBtn,
 .btn {
   border: none;
   background-color: transparent;
+}
+
+.icon {
+  transition: 250ms;
+  color: #ddd;
+}
+
+.icon:hover {
+  cursor: pointer;
+  color: #eec7c6;
+  transform: scale(1.1);
 }
