@@ -55,8 +55,10 @@ const Signup = ({ authService, repository }) => {
     <div className={styles.signupContainer}>
       <header className={styles.header}>
         <img className={styles.logo} src="/images/logo.png" />
-        <h1>3Witter에 오신 것을 환영합니다!</h1>
-        <h2>새로운 소식이 당신을 기다리고 있습니다.</h2>
+        <h1 className={styles.title}>3Witter에 오신 것을 환영합니다!</h1>
+        <h2 className={styles.title}>
+          새로운 소식이 당신을 기다리고 있습니다.
+        </h2>
       </header>
       <div>
         <button className={styles.btn} onClick={onClick}>

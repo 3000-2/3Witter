@@ -12,29 +12,34 @@ const Header = ({ user, GoHome, ChangePageHandle, LogoutHandle }) => {
   return (
     <header className={styles.header}>
       <div className={styles.headerWrap}>
-        <img className={styles.logo} src="/images/logo.png" onClick={GoHome} />
         <ul>
+          <img
+            className={styles.logo}
+            src="/images/logo.png"
+            onClick={GoHome}
+          />
           <li className={styles.headerList}>
             <button className={styles.btn} onClick={ChangePageHandle}>
-              <FontAwesomeIcon className={styles.icon} icon={faHome} />홈
+              <FontAwesomeIcon className={styles.icon} icon={faHome} />
+              <span className={styles.txt}>홈</span>
             </button>
           </li>
           <li className={styles.headerList}>
             <button className={styles.btn} onClick={ChangePageHandle}>
               <FontAwesomeIcon className={styles.icon} icon={faAddressBook} />
-              친구
+              <span className={styles.txt}>친구</span>
             </button>
           </li>
           <li className={styles.headerList}>
             <button className={styles.btn} onClick={ChangePageHandle}>
               <FontAwesomeIcon className={styles.icon} icon={faHeart} />
-              좋아요
+              <span className={styles.txt}>좋아요</span>
             </button>
           </li>
           <li className={styles.headerList}>
             <button className={styles.btn} onClick={ChangePageHandle}>
               <FontAwesomeIcon className={styles.icon} icon={faUser} />
-              프로필
+              <span className={styles.txt}>프로필</span>
             </button>
           </li>
         </ul>
