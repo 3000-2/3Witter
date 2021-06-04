@@ -19,6 +19,16 @@ class Repository {
     firebaseDB.ref(`user/${user.uid}/profile`).set(user);
   }
 
+  syncProfile(onUpdate) {
+    const ref = firebaseDB.ref(`user/`);
+
+    ref.on("value", (snapshot) => {
+      const Profile = snapshot.val();
+      Profile && onUpdate(Profile);
+    });
+    return () => ref.off();
+  }
+
   setProfile(user, onUpdate) {
     const ref = firebaseDB.ref(`user/${user.uid}/profile`);
 

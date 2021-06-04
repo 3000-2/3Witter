@@ -63,6 +63,11 @@ const Home = ({ authService, repository }) => {
   }, [authService]);
 
   useEffect(() => {
+    SyncTwit();
+    SyncProfile();
+  }, [repository]);
+
+  const SyncTwit = () => {
     const stopSync = repository.syncAllTwit((Twit) => {
       // console.log("트윗 : ", Twit);
       const updated = {};
@@ -77,7 +82,20 @@ const Home = ({ authService, repository }) => {
       setTwit(updated);
     });
     return () => stopSync();
-  }, [repository]);
+  };
+
+  const SyncProfile = () => {
+    const stopSync = repository.syncProfile((Profile) => {
+      console.log("프로필 : ", Profile);
+      const updated = {};
+      Object.keys(Profile).map((key) => {
+        console.log("value : ", Profile[key]);
+        updated[Profile[key].profile.uid] = { ...Profile[key].profile };
+      });
+      console.log("updated : ", updated);
+    });
+    return () => stopSync();
+  };
 
   const GoHome = () => {
     history.push("/");
@@ -98,7 +116,9 @@ const Home = ({ authService, repository }) => {
         {page === "Profile" && <Profile />}
         {page === "FriendsList" && <FriendsList />}
       </div>
-      <div className={styles.side}>사용자</div>
+      <div className={styles.side}>
+        <div className={styles.sideWrap}>사용자</div>
+      </div>
     </div>
   );
 };

@@ -5,8 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "./twit.module.css";
 
 const Twit = ({ twit }) => {
-  const value = `호호호<img src="http://localhost:3000/images/logo.png">`;
-  const { name, email, text } = twit;
+  const { name, email, text, uid } = twit;
 
   return (
     <div className={styles.twit}>

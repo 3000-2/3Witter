@@ -11,13 +11,13 @@ const Main = ({ user, twit, SubmitHandle }) => {
       </header>
       <div className={styles.main}>
         <Mytwit user={user} SubmitHandle={SubmitHandle} />
-        <ul>
-          <li>
-            {twit &&
-              Object.keys(twit).map((key) => (
+        <ul className={styles.twitList}>
+          {twit &&
+            Object.keys(twit).map((key) => (
+              <li>
                 <Twit twit={twit[key]} key={key} />
-              ))}
-          </li>
+              </li>
+            ))}
         </ul>
       </div>
     </>

@@ -1,11 +1,17 @@
 .header {
-  height: inherit;
-}
-
-.header {
   width: 20%;
+  height: inherit;
   background-color: #f3f3ee;
   position: relative;
+}
+
+.headerWrap {
+  /* justify-content: flex-end; */
+  width: inherit;
+  height: inherit;
+  position: fixed;
+  background-color: aqua;
+  border-right: 1px solid #ddd;
 }
 
 .logo {

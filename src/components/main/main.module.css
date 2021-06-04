@@ -9,3 +9,8 @@
   border-bottom: 1px solid #ddd;
   padding: 5px 10px;
 }
+
+.twitList {
+  display: flex;
+  flex-direction: column-reverse;
+}

@@ -14,7 +14,7 @@ const Mytwit = ({ user, SubmitHandle }) => {
     e.preventDefault();
     const date = Date.now();
     const twit = {
-      id: uid,
+      uid,
       name: displayName || "이름",
       time: date,
       email: email || "이메일",
