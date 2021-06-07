@@ -24,8 +24,10 @@ const Mytwit = ({ user, SubmitHandle }) => {
       uid,
       time,
       text,
+      favor: "",
     };
     SubmitHandle(twit);
+    // console.log("ref : ", ref.current);
     // ref.current.reset();
   };
 

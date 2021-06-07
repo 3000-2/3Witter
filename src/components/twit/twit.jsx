@@ -4,20 +4,37 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import styles from "./twit.module.css";
 
-const Twit = ({ user, twit, profile, DeleteHandle, FavoriteHandle }) => {
-  const { text } = twit;
-  const { name, email, uid, imageURL } = profile.profile;
-  const favorite = profile.favorite || "";
+const Twit = ({
+  user,
+  twit,
+  profile,
+  DeleteHandle,
+  FavoriteHandle,
+  DeleteFavoriteHandle,
+}) => {
+  if (!profile[twit.uid]) {
+    return "로딩중...";
+  }
+  const { text, time, favor } = twit;
+  const { name, email, uid, imageURL } = profile[twit.uid];
   const onDelete = () => {
     DeleteHandle(twit);
   };
 
+  const done = Object.keys(favor).filter((key) => key === user.uid);
   const onClick = () => {
-    FavoriteHandle(twit.uid);
+    if (done[0] === undefined) {
+      const updated = favor;
+      updated[user.uid] = true;
+      const Twit = { ...twit, favor: updated };
+      FavoriteHandle(user, Twit);
+    } else {
+      const updated = favor;
+      delete updated[user.uid];
+      const Twit = { ...twit, favor: updated };
+      DeleteFavoriteHandle(user, Twit);
+    }
   };
-
-  console.log("favorite : ", favorite[twit.uid]);
-  console.log("twit : ", twit.uid);
 
   return (
     <div className={styles.twit}>
@@ -46,17 +63,24 @@ const Twit = ({ user, twit, profile, DeleteHandle, FavoriteHandle }) => {
           dangerouslySetInnerHTML={{ __html: text }}
         ></div>
         <div className={styles.serviceForm}>
-          {favorite[twit.uid] !== twit.uid && (
-            <FontAwesomeIcon
-              className={styles.icon}
-              icon={faHeart}
-              onClick={onClick}
-            />
-          )}
+          <FontAwesomeIcon
+            className={`${styles.icon} ${getStyle(done)}`}
+            icon={faHeart}
+            onClick={onClick}
+          />
+          <div className={styles.favor}>좋아요 {Object.keys(favor).length}</div>
         </div>
       </div>
     </div>
   );
+};
+
+const getStyle = (done) => {
+  if (done[0] !== undefined) {
+    return styles.on;
+  } else {
+    return "";
+  }
 };
 
 export default Twit;

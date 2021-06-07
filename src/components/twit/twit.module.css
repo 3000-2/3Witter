@@ -63,8 +63,17 @@
   color: #ddd;
 }
 
+.icon.on {
+  transition: 250ms;
+  color: #eec7c6;
+}
+
 .icon:hover {
   cursor: pointer;
   color: #eec7c6;
   transform: scale(1.1);
+}
+
+.favor {
+  margin: 0 5px 0 10px;
 }

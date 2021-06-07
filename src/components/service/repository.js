@@ -16,7 +16,17 @@ class Repository {
   }
 
   deleteTwit(Twit) {
-    firebaseDB.ref(`twits/${Twit.uid}/${Twit.time}`).remove();
+    firebaseDB.ref(`twits/${Twit.uid}/${Twit.time}/favor/`).remove();
+  }
+
+  saveFavorite(user, Twit) {
+    firebaseDB
+      .ref(`twits/${Twit.uid}/${Twit.time}/favor/${user.uid}`)
+      .set(true);
+  }
+
+  deleteFavorite(user, Twit) {
+    firebaseDB.ref(`twits/${Twit.uid}/${Twit.time}/favor/${user.uid}`).remove();
   }
 
   saveProfile(user) {
@@ -41,10 +51,6 @@ class Repository {
       if (!Profile) onUpdate();
     });
     return () => ref.off();
-  }
-
-  saveFavorite(user, uid) {
-    firebaseDB.ref(`user/${user.uid}/favorite/${uid}`).set(uid);
   }
 }
 

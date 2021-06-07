@@ -11,27 +11,26 @@ const Main = ({
   SubmitHandle,
   DeleteHandle,
   FavoriteHandle,
+  DeleteFavoriteHandle,
 }) => {
-  if (profile["D60GFWrNwkc8L8bUPzgA02H4w7u2"])
-    console.log("profile : ", profile["D60GFWrNwkc8L8bUPzgA02H4w7u2"]);
-
-  console.log("twit : ", twit);
   return (
     <div className={styles.wrap}>
       <Mheader page="홈" />
       <div className={styles.main}>
         <Mytwit user={user} SubmitHandle={SubmitHandle} />
         <ul className={styles.twitList}>
-          {twit &&
-            profile !== "" &&
+          {user &&
+            twit &&
+            profile &&
             Object.keys(twit).map((key) => (
               <li key={key}>
                 <Twit
                   user={user}
                   twit={twit[key]}
-                  profile={profile[twit[key].uid]}
+                  profile={profile}
                   DeleteHandle={DeleteHandle}
                   FavoriteHandle={FavoriteHandle}
+                  DeleteFavoriteHandle={DeleteFavoriteHandle}
                   key={key}
                 />
               </li>

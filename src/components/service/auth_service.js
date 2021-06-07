@@ -14,7 +14,11 @@ class AuthService {
   onAuthChanged(onUserChanged) {
     firebaseAuth.onAuthStateChanged((user) => {
       if (user) {
-        onUserChanged(user);
+        onUserChanged({
+          uid: user.uid,
+          displayName: user.displayName,
+          email: user.email,
+        });
       } else {
         onUserChanged(null);
       }

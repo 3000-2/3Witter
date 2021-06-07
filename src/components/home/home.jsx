@@ -16,7 +16,6 @@ const Home = ({ authService, repository }) => {
   const [user, setUser] = useState({});
   const [profile, setProfile] = useState({});
   const [twit, setTwit] = useState();
-  const [favorite, setFavorite] = useState();
 
   const ChangePageHandle = (e) => {
     const page = e.currentTarget.textContent;
@@ -58,8 +57,18 @@ const Home = ({ authService, repository }) => {
     setTwit(updated);
   };
 
-  const FavoriteHandle = (uid) => {
-    repository.saveFavorite(user, uid);
+  const FavoriteHandle = (user, Twit) => {
+    repository.saveFavorite(user, Twit);
+    const updated = { ...twit };
+    updated[Twit.time] = Twit;
+    setTwit(updated);
+  };
+
+  const DeleteFavoriteHandle = (user, Twit) => {
+    repository.deleteFavorite(user, Twit);
+    const updated = { ...twit };
+    updated[Twit.time] = Twit;
+    setTwit(updated);
   };
 
   useEffect(() => {
@@ -105,9 +114,9 @@ const Home = ({ authService, repository }) => {
     const stopSync = repository.syncProfile((Profile) => {
       const updatedProfile = {};
       Object.keys(Profile).forEach((key) => {
-        updatedProfile[Profile[key].profile.uid] = { ...Profile[key] };
+        updatedProfile[Profile[key].profile.uid] = { ...Profile[key].profile };
       });
-      console.log(updatedProfile);
+      // console.log(updatedProfile);
       setProfile(updatedProfile);
     });
     return () => stopSync();
@@ -134,11 +143,12 @@ const Home = ({ authService, repository }) => {
             SubmitHandle={SubmitHandle}
             DeleteHandle={DeleteHandle}
             FavoriteHandle={FavoriteHandle}
+            DeleteFavoriteHandle={DeleteFavoriteHandle}
           />
         )}
         {page === "Profile" && <Profile />}
         {page === "FriendsList" && <FriendsList />}
-        {page === "Favorite" && <Favorite />}
+        {page === "Favorite" && <Favorite favorite={profile} />}
       </div>
       <Userlist profile={profile} />
     </div>

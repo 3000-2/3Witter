@@ -9,7 +9,7 @@ const Userlist = ({ profile }) => {
         {profile &&
           Object.keys(profile).map((key) => (
             <li key={key}>
-              <div>{profile[key].profile.name}</div>
+              <div>{profile[key].name}</div>
             </li>
           ))}
       </ul>
