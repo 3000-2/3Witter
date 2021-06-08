@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import Swal from "sweetalert2";
 
-import FriendsList from "../friendslist/friendslist";
 import Main from "../main/main";
 import Profile from "../profile/profile";
 import styles from "./home.module.css";
@@ -21,9 +20,6 @@ const Home = ({ authService, repository }) => {
     const page = e.currentTarget.textContent;
     e.preventDefault();
     switch (page) {
-      case "친구":
-        setPage("FriendsList");
-        break;
       case "프로필":
         setPage("Profile");
         break;
@@ -147,8 +143,17 @@ const Home = ({ authService, repository }) => {
           />
         )}
         {page === "Profile" && <Profile />}
-        {page === "FriendsList" && <FriendsList />}
-        {page === "Favorite" && <Favorite favorite={profile} />}
+        {page === "Favorite" && (
+          <Favorite
+            user={user}
+            twit={twit}
+            profile={profile}
+            SubmitHandle={SubmitHandle}
+            DeleteHandle={DeleteHandle}
+            FavoriteHandle={FavoriteHandle}
+            DeleteFavoriteHandle={DeleteFavoriteHandle}
+          />
+        )}
       </div>
       <Userlist profile={profile} />
     </div>

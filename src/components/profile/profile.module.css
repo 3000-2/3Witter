@@ -1,0 +1,15 @@
+.profile {
+  padding: 80px 20px;
+}
+
+.form {
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 16px;
+}
+
+.input {
+  padding: 5px;
+  font-size: 1.3rem;
+  border-radius: 8px;
+}

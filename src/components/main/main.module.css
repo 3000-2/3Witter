@@ -3,14 +3,13 @@
   width: inherit;
   flex-direction: column;
   margin: 0;
-  border-right: 1px solid #ddd;
 }
 
 .main {
   display: flex;
   flex-direction: column;
   width: inherit;
-  padding: 50px 20px;
+  padding: 60px 20px;
   overflow: hidden;
 }
 

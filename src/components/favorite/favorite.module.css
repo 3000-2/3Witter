@@ -1,0 +1,5 @@
+.twitList {
+  display: flex;
+  flex-direction: column-reverse;
+  padding: 60px 20px;
+}

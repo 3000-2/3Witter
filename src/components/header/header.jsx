@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  faHome,
-  faAddressBook,
-  faHeart,
-  faUser,
-} from "@fortawesome/free-solid-svg-icons";
+import { faHome, faHeart, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "./header.module.css";
 
@@ -23,12 +18,6 @@ const Header = ({ user, GoHome, ChangePageHandle, LogoutHandle }) => {
             <button className={styles.btn} onClick={ChangePageHandle}>
               <FontAwesomeIcon className={styles.icon} icon={faHome} />
               <span className={styles.txt}>홈</span>
-            </button>
-          </li>
-          <li className={styles.headerList}>
-            <button className={styles.btn} onClick={ChangePageHandle}>
-              <FontAwesomeIcon className={styles.icon} icon={faAddressBook} />
-              <span className={styles.txt}>친구</span>
             </button>
           </li>
           <li className={styles.headerList}>

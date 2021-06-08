@@ -18,6 +18,7 @@ const Mytwit = ({ user, SubmitHandle }) => {
 
   const onClick = (e) => {
     e.preventDefault();
+    // e.target.reset();
     const date = Date.now();
     const time = today + date;
     const twit = {
@@ -27,8 +28,7 @@ const Mytwit = ({ user, SubmitHandle }) => {
       favor: {},
     };
     SubmitHandle(twit);
-    // console.log("ref : ", ref.current);
-    // ref.current.reset();
+    setText("");
   };
 
   return (
