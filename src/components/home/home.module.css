@@ -2,6 +2,7 @@
   display: flex;
   justify-content: center;
   height: 100vh;
+  position: relative;
 }
 
 .main {
@@ -9,20 +10,8 @@
   width: 600px;
 }
 
-@media screen and (max-width: 850px) {
-  /* .main {
-    width: 95%;
-  } */
-}
-
 @media screen and (max-width: 768px) {
   .main {
-    width: 550px;
-  }
-}
-
-@media screen and (max-width: 650px) {
-  .main {
-    width: 500px;
+    width: 100vw;
   }
 }

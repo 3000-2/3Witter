@@ -93,7 +93,48 @@
 }
 
 @media screen and (max-width: 768px) {
-  .header {
+  .logo {
     display: none;
+  }
+  .btn,
+  .icon {
+    z-index: 10;
+  }
+  .header {
+    position: fixed;
+    width: 100vw;
+    height: 50px;
+    right: 0px;
+    top: 0;
+    z-index: 10;
+    background-color: inherit;
+  }
+  .headerWrap {
+    width: 100vw;
+    height: 50px;
+    position: absolute;
+    right: 0px;
+    top: 0;
+    background-color: inherit;
+  }
+  .headerWrap ul {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  .headerList .btn,
+  .headerList .icon {
+    color: white;
+  }
+
+  .profile {
+    display: none;
+  }
+
+  .profile .btn {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
   }
 }
