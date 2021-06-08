@@ -33,12 +33,20 @@ const Home = ({ authService, repository }) => {
 
   const LogoutHandle = () => {
     Swal.fire({
-      title: "로그아웃 성공!",
+      title: "로그아웃할까요?",
+      showCancelButton: true,
+      cancelButtonText: "아니요!",
+      cancelButtonColor: "#ddd",
+      confirmButtonText: "네!",
+      confirmButtonColor: "#EEC7C6",
+    }).then((result) => {
+      if (result.value) {
+        authService.logout();
+      }
     });
-    authService.logout();
   };
 
-  const SubmitHandle = (Twit) => {
+  const SubmitTwitHandle = (Twit) => {
     repository.saveTwit(user.uid, Twit);
     const updated = { ...twit };
     updated[Twit.time] = Twit;
@@ -65,6 +73,13 @@ const Home = ({ authService, repository }) => {
     const updated = { ...twit };
     updated[Twit.time] = Twit;
     setTwit(updated);
+  };
+
+  const SubmitProfileHandle = (Profile) => {
+    const updated = { ...profile };
+    updated[Profile.uid] = Profile;
+    repository.saveProfile(Profile);
+    setProfile(updated);
   };
 
   useEffect(() => {
@@ -126,6 +141,7 @@ const Home = ({ authService, repository }) => {
     <div className={styles.home}>
       <Header
         user={user}
+        profile={profile}
         GoHome={GoHome}
         LogoutHandle={LogoutHandle}
         ChangePageHandle={ChangePageHandle}
@@ -136,19 +152,25 @@ const Home = ({ authService, repository }) => {
             user={user}
             twit={twit}
             profile={profile}
-            SubmitHandle={SubmitHandle}
+            SubmitTwitHandle={SubmitTwitHandle}
             DeleteHandle={DeleteHandle}
             FavoriteHandle={FavoriteHandle}
             DeleteFavoriteHandle={DeleteFavoriteHandle}
           />
         )}
-        {page === "Profile" && <Profile />}
+        {page === "Profile" && (
+          <Profile
+            user={user}
+            profile={profile}
+            SubmitProfileHandle={SubmitProfileHandle}
+          />
+        )}
         {page === "Favorite" && (
           <Favorite
             user={user}
             twit={twit}
             profile={profile}
-            SubmitHandle={SubmitHandle}
+            SubmitTwitHandle={SubmitTwitHandle}
             DeleteHandle={DeleteHandle}
             FavoriteHandle={FavoriteHandle}
             DeleteFavoriteHandle={DeleteFavoriteHandle}

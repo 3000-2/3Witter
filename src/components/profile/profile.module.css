@@ -1,15 +1,56 @@
 .profile {
-  padding: 80px 20px;
+  padding: 50px 20px;
 }
 
-.form {
-  border: 1px solid #ddd;
-  padding: 10px;
-  border-radius: 16px;
+.title,
+.text,
+.image {
+  padding: 8px 16px;
 }
 
-.input {
-  padding: 5px;
+.title {
   font-size: 1.3rem;
+  font-weight: 700;
+  border-radius: 16px;
+  margin: 10px 0;
+  background-color: #f3f3ee;
+}
+
+.text {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.inputName {
+  border: none;
+  padding: 8px;
+  font-size: 1rem;
+  border: 1px solid #ddd;
   border-radius: 8px;
+}
+
+.image {
+  display: block;
+  width: 300px;
+  height: 300px;
+}
+
+.imageInput {
+  display: none;
+}
+
+.Btn {
+  border: none;
+  border-radius: 8px;
+  padding: 10px;
+  margin: 20px;
+  font-size: 1.3rem;
+  background-color: #eec7c6;
+  color: white;
+  transition: 250ms;
+}
+
+.Btn:hover {
+  cursor: pointer;
+  opacity: 0.6;
 }

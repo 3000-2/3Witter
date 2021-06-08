@@ -12,7 +12,8 @@
 }
 
 .profileImg {
-  width: 100%;
+  width: 48px;
+  object-fit: contain;
 }
 
 .twitForm {
@@ -29,6 +30,17 @@
   position: absolute;
   right: 0px;
   top: 0px;
+}
+
+.imgForm {
+  width: 80%;
+  margin: 10px auto;
+  background-color: white;
+}
+
+.imgForm img {
+  width: 100%;
+  object-fit: contain;
 }
 
 .text {

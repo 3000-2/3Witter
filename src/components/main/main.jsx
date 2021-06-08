@@ -8,7 +8,7 @@ const Main = ({
   user,
   twit,
   profile,
-  SubmitHandle,
+  SubmitTwitHandle,
   DeleteHandle,
   FavoriteHandle,
   DeleteFavoriteHandle,
@@ -17,7 +17,7 @@ const Main = ({
     <div className={styles.wrap}>
       <Mheader page="홈" />
       <div className={styles.main}>
-        <Mytwit user={user} SubmitHandle={SubmitHandle} />
+        <Mytwit user={user} SubmitTwitHandle={SubmitTwitHandle} />
         <ul className={styles.twitList}>
           {user &&
             twit &&

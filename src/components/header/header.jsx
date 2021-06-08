@@ -3,7 +3,13 @@ import { faHome, faHeart, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "./header.module.css";
 
-const Header = ({ user, GoHome, ChangePageHandle, LogoutHandle }) => {
+const Header = ({ user, profile, GoHome, ChangePageHandle, LogoutHandle }) => {
+  if (!profile[user.uid]) {
+    return "로딩...";
+  }
+  // console.log(profile);
+  const { name, imageURL } = profile[user.uid];
+
   return (
     <header className={styles.header}>
       <div className={styles.headerWrap}>
@@ -34,9 +40,13 @@ const Header = ({ user, GoHome, ChangePageHandle, LogoutHandle }) => {
           </li>
         </ul>
         <div className={styles.profile}>
-          <img className={styles.profileImg} src="/images/logo.png" alt="img" />
+          <img
+            className={styles.profileImg}
+            src={imageURL || "/images/logo.png"}
+            alt="img"
+          />
           <div className={styles.contents}>
-            <div className={styles.text}>{user.displayName}</div>
+            <div className={styles.text}>{name}</div>
             <div className={styles.text}>{user.email}</div>
           </div>
           <button className={styles.btn} onClick={LogoutHandle}>

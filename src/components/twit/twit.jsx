@@ -1,4 +1,5 @@
 import React from "react";
+import Swal from "sweetalert2";
 import { faHeart, faCut } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -18,7 +19,18 @@ const Twit = ({
   const { text, time, favor = {} } = twit;
   const { name, email, uid, imageURL } = profile[twit.uid];
   const onDelete = () => {
-    DeleteHandle(twit);
+    Swal.fire({
+      title: "삭제할까요?",
+      showCancelButton: true,
+      cancelButtonText: "아니요!",
+      cancelButtonColor: "#ddd",
+      confirmButtonText: "네!",
+      confirmButtonColor: "#EEC7C6",
+    }).then((result) => {
+      if (result.value) {
+        DeleteHandle(twit);
+      }
+    });
   };
 
   const done = Object.keys(favor).filter((key) => key === user.uid);
@@ -58,6 +70,11 @@ const Twit = ({
             />
           )}
         </div>
+        {twit && twit.imageURL && (
+          <div className={styles.imgForm}>
+            <img src={twit.imageURL} alt="img" />
+          </div>
+        )}
         <div
           className={styles.text}
           dangerouslySetInnerHTML={{ __html: text }}

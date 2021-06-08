@@ -13,7 +13,8 @@
 }
 
 .profile .profileImg {
-  width: 100%;
+  width: 48px;
+  object-fit: contain;
 }
 
 .twitForm {
@@ -22,11 +23,23 @@
   padding: 0 10px;
 }
 
+.imgForm {
+  width: 80%;
+  margin: 10px auto;
+  background-color: white;
+}
+
+.imgForm img {
+  width: 100%;
+  object-fit: contain;
+}
+
 .twitForm .input {
   display: block;
   width: 100%;
   padding: 10px;
   font-size: 1.2rem;
+  border-top: 1px solid #ddd;
 }
 
 .serviceForm {
@@ -34,6 +47,10 @@
   padding: 10px 0;
   border-top: 1px solid #ddd;
   position: relative;
+}
+
+.imageInput {
+  display: none;
 }
 
 .input,
