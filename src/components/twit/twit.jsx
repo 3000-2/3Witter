@@ -15,7 +15,7 @@ const Twit = ({
   if (!profile[twit.uid]) {
     return "로딩중...";
   }
-  const { text, time, favor } = twit;
+  const { text, time, favor = {} } = twit;
   const { name, email, uid, imageURL } = profile[twit.uid];
   const onDelete = () => {
     DeleteHandle(twit);

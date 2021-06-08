@@ -16,7 +16,7 @@ class Repository {
   }
 
   deleteTwit(Twit) {
-    firebaseDB.ref(`twits/${Twit.uid}/${Twit.time}/favor/`).remove();
+    firebaseDB.ref(`twits/${Twit.uid}/${Twit.time}`).remove();
   }
 
   saveFavorite(user, Twit) {

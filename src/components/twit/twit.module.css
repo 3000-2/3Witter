@@ -64,7 +64,6 @@
 }
 
 .icon.on {
-  transition: 250ms;
   color: #eec7c6;
 }
 

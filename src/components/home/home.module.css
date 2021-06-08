@@ -10,13 +10,19 @@
 }
 
 @media screen and (max-width: 850px) {
-  .main {
-    width: 500px;
-  }
+  /* .main {
+    width: 95%;
+  } */
 }
 
 @media screen and (max-width: 768px) {
   .main {
-    width: 90%;
+    width: 550px;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .main {
+    width: 500px;
   }
 }
