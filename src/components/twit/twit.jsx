@@ -56,6 +56,7 @@ const Twit = memo(
             className={styles.profileImg}
             src={imageURL || "/images/logo.png"}
             alt="img"
+            secure="true"
           />
         </div>
         <div className={styles.twitForm}>
@@ -73,7 +74,7 @@ const Twit = memo(
           </div>
           {twit && twit.imageURL && (
             <div className={styles.imgForm}>
-              <img src={twit.imageURL} alt="img" />
+              <img src={twit.imageURL} alt="img" secure="true" />
             </div>
           )}
           <div

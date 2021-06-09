@@ -1,7 +1,10 @@
+import axios from "axios";
+
 class UploadImage {
   async upload(file, preset) {
     const data = new FormData();
     data.append("file", file);
+    data.append("secure", true);
 
     if (preset === "profile") {
       data.append("upload_preset", process.env.REACT_APP_UPLOAD_PROFILE_PRESET);
@@ -13,7 +16,6 @@ class UploadImage {
       method: "POST",
       body: data,
     });
-
     return await result.json();
   }
 }
