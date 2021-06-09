@@ -22,6 +22,10 @@
 }
 
 .inputName {
+  width: 175px;
+}
+
+.inputName {
   border: none;
   padding: 8px;
   font-size: 1rem;

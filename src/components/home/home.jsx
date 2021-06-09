@@ -15,6 +15,7 @@ const Home = ({ authService, repository }) => {
   const [user, setUser] = useState({});
   const [profile, setProfile] = useState({});
   const [twit, setTwit] = useState();
+  const [img, setImg] = useState(false);
 
   const ChangePageHandle = (e) => {
     const page = e.currentTarget.textContent;
@@ -137,6 +138,16 @@ const Home = ({ authService, repository }) => {
     history.push("/");
   };
 
+  const DetailImgHandle = (img) => {
+    Swal.fire({
+      imageUrl: img || "",
+      imageWidth: 300,
+      imageAlt: "Detail",
+      confirmButtonText: "그만 볼래요!",
+      confirmButtonColor: "#EEC7C6",
+    });
+  };
+
   return (
     <div className={styles.home}>
       <Header
@@ -156,6 +167,7 @@ const Home = ({ authService, repository }) => {
             DeleteHandle={DeleteHandle}
             FavoriteHandle={FavoriteHandle}
             DeleteFavoriteHandle={DeleteFavoriteHandle}
+            DetailImgHandle={DetailImgHandle}
           />
         )}
         {page === "Profile" && (

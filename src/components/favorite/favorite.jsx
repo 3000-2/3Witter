@@ -13,7 +13,7 @@ const Favorite = memo(
     DeleteFavoriteHandle,
   }) => {
     if (!twit) {
-      return "로딩...";
+      return <Mheader page="좋아요" />;
     }
     const favorite = Object.values(twit).map((value) => {
       let favor = [];

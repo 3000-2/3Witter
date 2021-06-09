@@ -61,7 +61,6 @@ const Mytwit = memo(({ user, SubmitTwitHandle }) => {
       name: uploaded.original_filename,
       imageURL: uploaded.secure_url,
     });
-    console.log(uploaded.url);
     setLoading(false);
   };
 
@@ -76,7 +75,7 @@ const Mytwit = memo(({ user, SubmitTwitHandle }) => {
         <img className={styles.profileImg} src="/images/logo.png" alt="img" />
       </div>
       <div className={styles.twitForm}>
-        {image && image.imageURL && (
+        {image?.imageURL && (
           <div className={styles.imgForm}>
             <img src={image.imageURL} alt="image" />
           </div>

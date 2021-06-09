@@ -12,6 +12,7 @@ const Main = ({
   DeleteHandle,
   FavoriteHandle,
   DeleteFavoriteHandle,
+  DetailImgHandle,
 }) => {
   return (
     <div className={styles.wrap}>
@@ -31,6 +32,7 @@ const Main = ({
                   DeleteHandle={DeleteHandle}
                   FavoriteHandle={FavoriteHandle}
                   DeleteFavoriteHandle={DeleteFavoriteHandle}
+                  DetailImgHandle={DetailImgHandle}
                   key={key}
                 />
               </li>

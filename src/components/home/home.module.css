@@ -8,10 +8,28 @@
 .main {
   height: inherit;
   width: 600px;
+  position: relative;
+}
+
+.detailImg {
+  width: 400px;
+  height: 400px;
+  background-color: black;
+  top: 100px;
+  left: 100px;
+  object-fit: contain;
+  position: absolute;
+  margin: 0 auto;
+  z-index: 20;
+  transition: 250ms;
 }
 
 @media screen and (max-width: 768px) {
   .main {
     width: 100vw;
+  }
+
+  .detailImg {
+    left: 50px;
   }
 }

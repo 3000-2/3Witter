@@ -13,6 +13,7 @@ const Twit = memo(
     DeleteHandle,
     FavoriteHandle,
     DeleteFavoriteHandle,
+    DetailImgHandle,
   }) => {
     if (!profile[twit.uid]) {
       return "로딩중...";
@@ -49,6 +50,12 @@ const Twit = memo(
       }
     };
 
+    const onDetail = (e) => {
+      const img = e.target.src;
+      console.log(img);
+      DetailImgHandle(img);
+    };
+
     return (
       <div className={styles.twit}>
         <div className={styles.profile}>
@@ -56,7 +63,7 @@ const Twit = memo(
             className={styles.profileImg}
             src={imageURL || "/images/logo.png"}
             alt="img"
-            secure="true"
+            onClick={onDetail}
           />
         </div>
         <div className={styles.twitForm}>
@@ -72,9 +79,9 @@ const Twit = memo(
               />
             )}
           </div>
-          {twit && twit.imageURL && (
+          {twit?.imageURL && (
             <div className={styles.imgForm}>
-              <img src={twit.imageURL} alt="img" secure="true" />
+              <img src={twit.imageURL} alt="img" onClick={onDetail} />
             </div>
           )}
           <div

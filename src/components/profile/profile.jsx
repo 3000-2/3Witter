@@ -25,7 +25,7 @@ const Profile = memo(({ user, profile, SubmitProfileHandle }) => {
   const onSubmit = (e) => {
     e.preventDefault();
     Swal.fire({
-      title: "프로필 변경할까요?",
+      title: "저장할까요?",
       showCancelButton: true,
       cancelButtonText: "아니요!",
       cancelButtonColor: "#ddd",
@@ -53,7 +53,6 @@ const Profile = memo(({ user, profile, SubmitProfileHandle }) => {
       name: uploaded.original_filename,
       imageURL: uploaded.secure_url,
     });
-    console.log(image);
     setLoading(false);
   };
 
@@ -66,7 +65,7 @@ const Profile = memo(({ user, profile, SubmitProfileHandle }) => {
           <div className={styles.text}>{email}</div>
           <div className={styles.title}>닉네임 변경</div>
           <span className={styles.text}>
-            현재 닉네임 : {name}　={">"}
+            현재 닉네임 : {name}　{">"}
           </span>
           <input
             className={styles.inputName}
@@ -79,6 +78,7 @@ const Profile = memo(({ user, profile, SubmitProfileHandle }) => {
             <img
               className={styles.image}
               src={image.imageURL || imageURL || ""}
+              onClick={onClick}
               alt="profile"
             />
           )}

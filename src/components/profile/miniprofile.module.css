@@ -12,10 +12,9 @@
 .profileImg {
   display: block;
   width: 150px;
-  height: 150px;
   object-fit: contain;
   margin: 20px;
-  border-radius: 24px;
+  border-radius: 32px;
   overflow: hidden;
 }
 

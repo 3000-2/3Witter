@@ -103,6 +103,11 @@
     color: white;
   }
 
+  .headerList .btn {
+    padding: 5px;
+    margin-top: 5px;
+  }
+
   .profile .profileImg,
   .profile .contents {
     display: none;
