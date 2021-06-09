@@ -59,7 +59,7 @@ const Mytwit = memo(({ user, SubmitTwitHandle }) => {
     const uploaded = await uploadImage.upload(file, "image");
     setImage({
       name: uploaded.original_filename,
-      imageURL: uploaded.url,
+      imageURL: uploaded.secure_url,
     });
     console.log(uploaded.url);
     setLoading(false);

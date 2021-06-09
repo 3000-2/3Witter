@@ -51,7 +51,7 @@ const Profile = memo(({ user, profile, SubmitProfileHandle }) => {
     const uploaded = await uploadImage.upload(file, "profile");
     setImage({
       name: uploaded.original_filename,
-      imageURL: uploaded.url,
+      imageURL: uploaded.secure_url,
     });
     console.log(image);
     setLoading(false);

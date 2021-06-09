@@ -12,11 +12,15 @@ class UploadImage {
       data.append("upload_preset", process.env.REACT_APP_UPLOAD_IMAGES_PRESET);
     }
 
-    const result = await fetch(process.env.REACT_APP_CLOUD_DB, {
-      method: "POST",
-      body: data,
+    const result = await axios({
+      method: "post",
+      url: process.env.REACT_APP_CLOUD_DB,
+      data: data,
+    }).then((result) => {
+      return result;
     });
-    return await result.json();
+
+    return await result.data;
   }
 }
 
