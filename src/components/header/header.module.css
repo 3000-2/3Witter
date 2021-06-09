@@ -41,7 +41,7 @@
   font-size: 1.5rem;
   border-radius: 8px;
   padding: 10px;
-  transition: 250ms;
+  /* transition: 250ms; */
 }
 
 .headerList .btn:hover {
@@ -52,54 +52,13 @@
 .btn,
 .icon {
   color: #eec7c6;
+  transition: 250ms;
 }
 
 .icon {
   width: 28px;
   height: 28px;
   margin: 0 16px;
-}
-
-.profile {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  bottom: 20px;
-  padding: 10px;
-  width: 100%;
-  position: absolute;
-}
-
-.profileImg {
-  display: block;
-  width: 150px;
-  height: 150px;
-  object-fit: contain;
-  margin: 20px;
-  border-radius: 24px;
-  overflow: hidden;
-}
-
-.profile .text {
-  font-size: 0.9rem;
-  font-weight: 600;
-}
-
-.profile .btn {
-  margin-top: 20px;
-  border: none;
-  border-radius: 8px;
-  padding: 5px;
-  font-size: 1.3rem;
-  background-color: #eec7c6;
-  color: white;
-  transition: 250ms;
-}
-
-.profile .btn:hover {
-  cursor: pointer;
-  opacity: 0.6;
 }
 
 @media screen and (max-width: 1100px) {

@@ -34,12 +34,32 @@
   object-fit: contain;
 }
 
+.loading {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+  border: 11px solid white;
+  border-top: 11px solid tomato;
+  border-radius: 50%;
+  animation-duration: 1.5s;
+  animation-name: rotate;
+  animation-iteration-count: infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .twitForm .input {
   display: block;
   width: 100%;
   padding: 10px;
   font-size: 1.2rem;
-  border-top: 1px solid #ddd;
 }
 
 .serviceForm {

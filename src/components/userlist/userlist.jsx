@@ -1,7 +1,7 @@
-import React from "react";
+import React, { memo } from "react";
 import styles from "./userlist.module.css";
 
-const Userlist = ({ profile }) => {
+const Userlist = memo(({ profile }) => {
   return (
     <div className={styles.side}>
       <ul>
@@ -15,6 +15,6 @@ const Userlist = ({ profile }) => {
       </ul>
     </div>
   );
-};
+});
 
 export default Userlist;

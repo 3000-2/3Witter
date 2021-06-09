@@ -1,7 +1,9 @@
-import React, { useRef, useState } from "react";
+import React, { memo, useRef, useState } from "react";
 import { Editor } from "react-editor";
 import { faImage } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Swal from "sweetalert2";
+
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import UploadImage from "../service/uploadImage";
@@ -13,9 +15,10 @@ const uploadImage = new UploadImage();
 // dayjs 초기화
 dayjs.extend(relativeTime);
 
-const Mytwit = ({ user, SubmitTwitHandle }) => {
+const Mytwit = memo(({ user, SubmitTwitHandle }) => {
   const [text, setText] = useState("");
-  const [image, setImage] = useState();
+  const [image, setImage] = useState("");
+  const [loading, setLoading] = useState();
   const ref = useRef();
   const imageRef = useRef();
   const { uid } = user;
@@ -33,19 +36,32 @@ const Mytwit = ({ user, SubmitTwitHandle }) => {
       imageURL: image.imageURL || "",
       favor: {},
     };
-    SubmitTwitHandle(twit);
-    setText("");
+    Swal.fire({
+      title: "트윗할까요?",
+      showCancelButton: true,
+      cancelButtonText: "아니요!",
+      cancelButtonColor: "#ddd",
+      confirmButtonText: "네!",
+      confirmButtonColor: "#EEC7C6",
+    }).then((result) => {
+      if (result.value) {
+        SubmitTwitHandle(twit);
+        setImage("");
+        setText("");
+      }
+    });
   };
 
   const onChange = async (e) => {
     e.preventDefault();
     const file = e.target.files[0];
-
+    setLoading(true);
     const uploaded = await uploadImage.upload(file, "image");
     setImage({
       name: uploaded.original_filename,
       imageURL: uploaded.url,
     });
+    setLoading(false);
   };
 
   const onSubmit = (e) => {
@@ -64,6 +80,7 @@ const Mytwit = ({ user, SubmitTwitHandle }) => {
             <img src={image.imageURL} alt="image" />
           </div>
         )}
+        {loading && <div className={styles.loading} />}
         <Editor
           ref={ref}
           placeholder="오늘은 무슨 일이 있었나요?"
@@ -94,6 +111,6 @@ const Mytwit = ({ user, SubmitTwitHandle }) => {
       </div>
     </div>
   );
-};
+});
 
 export default Mytwit;

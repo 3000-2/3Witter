@@ -1,12 +1,13 @@
-import React, { useRef, useState } from "react";
+import React, { memo, useRef, useState } from "react";
 import Swal from "sweetalert2";
 import Mheader from "../header/mheader";
 import UploadImage from "../service/uploadImage";
 import styles from "./profile.module.css";
 
 const uploadImage = new UploadImage();
-const Profile = ({ user, profile, SubmitProfileHandle }) => {
+const Profile = memo(({ user, profile, SubmitProfileHandle }) => {
   const [image, setImage] = useState(profile[user.uid]);
+  const [loading, setLoading] = useState();
   const ref = useRef();
   const nameRef = useRef();
 
@@ -44,6 +45,7 @@ const Profile = ({ user, profile, SubmitProfileHandle }) => {
 
   const onChange = async (e) => {
     e.preventDefault();
+    setLoading(true);
     const file = e.target.files[0];
 
     const uploaded = await uploadImage.upload(file, "profile");
@@ -51,6 +53,8 @@ const Profile = ({ user, profile, SubmitProfileHandle }) => {
       name: uploaded.original_filename,
       imageURL: uploaded.url,
     });
+    console.log(image);
+    setLoading(false);
   };
 
   return (
@@ -71,11 +75,14 @@ const Profile = ({ user, profile, SubmitProfileHandle }) => {
             placeholder="변경할 닉네임"
           />
           <div className={styles.title}>프로필 이미지</div>
-          <img
-            className={styles.image}
-            src={imageURL || image.imageURL || "/images/logo.png"}
-            alt="profile"
-          />
+          {!loading && (
+            <img
+              className={styles.image}
+              src={image.imageURL || imageURL || ""}
+              alt="profile"
+            />
+          )}
+          {loading && <div className={styles.loading} />}
           <input
             className={styles.imageInput}
             ref={ref}
@@ -93,6 +100,6 @@ const Profile = ({ user, profile, SubmitProfileHandle }) => {
       </div>
     </>
   );
-};
+});
 
 export default Profile;

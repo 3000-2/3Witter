@@ -15,7 +15,7 @@ const Main = ({
 }) => {
   return (
     <div className={styles.wrap}>
-      <Mheader page="홈" />
+      <Mheader page="메인" />
       <div className={styles.main}>
         <Mytwit user={user} SubmitTwitHandle={SubmitTwitHandle} />
         <ul className={styles.twitList}>
