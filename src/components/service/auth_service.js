@@ -1,4 +1,4 @@
-import { firebaseAuth, googleProvider, twitterProvider } from "./firebase";
+import { firebaseAuth, googleProvider, twitterProvider } from './firebase';
 
 class AuthService {
   login(provider) {
@@ -27,9 +27,9 @@ class AuthService {
 
   getProvider(provider) {
     switch (provider) {
-      case "Google":
+      case 'Google':
         return googleProvider;
-      case "Twitter":
+      case 'Twitter':
         return twitterProvider;
       default:
         throw new Error(`unknown provide name : ${provider}`);

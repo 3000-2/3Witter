@@ -1,4 +1,4 @@
-import { firebaseDB } from "./firebase";
+import { firebaseDB } from './firebase';
 
 class Repository {
   saveTwit(uid, Twit) {
@@ -6,11 +6,11 @@ class Repository {
   }
 
   syncAllTwit(onUpdate) {
-    const ref = firebaseDB.ref(`twits`);
+    const ref = firebaseDB.ref(`twits/`);
 
-    ref.on("value", (snapshot) => {
+    ref.on('value', (snapshot) => {
       const Twit = snapshot.val();
-      Twit && onUpdate(Twit);
+      if (Twit) onUpdate(Twit);
     });
     return () => ref.off();
   }
@@ -36,7 +36,7 @@ class Repository {
   syncProfile(onUpdate) {
     const ref = firebaseDB.ref(`user/`);
 
-    ref.on("value", (snapshot) => {
+    ref.on('value', (snapshot) => {
       const Profile = snapshot.val();
       Profile && onUpdate(Profile);
     });
@@ -46,7 +46,7 @@ class Repository {
   setProfile(user, onUpdate) {
     const ref = firebaseDB.ref(`user/${user.uid}/profile`);
 
-    ref.on("value", (snapshot) => {
+    ref.on('value', (snapshot) => {
       const Profile = snapshot.val();
       if (!Profile) onUpdate();
     });

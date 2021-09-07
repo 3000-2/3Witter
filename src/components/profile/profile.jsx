@@ -1,8 +1,8 @@
-import React, { memo, useRef, useState } from "react";
-import Swal from "sweetalert2";
-import Mheader from "../header/mheader";
-import UploadImage from "../service/uploadImage";
-import styles from "./profile.module.css";
+import React, { memo, useRef, useState } from 'react';
+import Swal from 'sweetalert2';
+import Mheader from '../header/mheader';
+import UploadImage from '../service/uploadImage';
+import styles from './profile.module.css';
 
 const uploadImage = new UploadImage();
 const Profile = memo(({ user, profile, SubmitProfileHandle }) => {
@@ -11,8 +11,8 @@ const Profile = memo(({ user, profile, SubmitProfileHandle }) => {
   const ref = useRef();
   const nameRef = useRef();
 
-  if (!profile && !user) {
-    return "로딩...";
+  if (!profile || !user) {
+    return '로딩...';
   }
 
   const { name, email, imageURL } = profile[user.uid];
@@ -25,19 +25,19 @@ const Profile = memo(({ user, profile, SubmitProfileHandle }) => {
   const onSubmit = (e) => {
     e.preventDefault();
     Swal.fire({
-      title: "저장할까요?",
+      title: '저장할까요?',
       showCancelButton: true,
-      cancelButtonText: "아니요!",
-      cancelButtonColor: "#ddd",
-      confirmButtonText: "네!",
-      confirmButtonColor: "#EEC7C6",
+      cancelButtonText: '아니요!',
+      cancelButtonColor: '#ddd',
+      confirmButtonText: '네!',
+      confirmButtonColor: '#EEC7C6',
     }).then((result) => {
       if (result.value) {
         SubmitProfileHandle({
           uid: user.uid,
           name: nameRef.current.value || name,
           email: user.email,
-          imageURL: image.imageURL || "",
+          imageURL: image.imageURL || '',
         });
       }
     });
@@ -48,7 +48,7 @@ const Profile = memo(({ user, profile, SubmitProfileHandle }) => {
     setLoading(true);
     const file = e.target.files[0];
 
-    const uploaded = await uploadImage.upload(file, "profile");
+    const uploaded = await uploadImage.upload(file, 'profile');
     setImage({
       name: uploaded.original_filename,
       imageURL: uploaded.secure_url,
@@ -65,7 +65,7 @@ const Profile = memo(({ user, profile, SubmitProfileHandle }) => {
           <div className={styles.text}>{email}</div>
           <div className={styles.title}>닉네임 변경</div>
           <span className={styles.text}>
-            현재 닉네임 : {name}　{">"}
+            현재 닉네임 : {name}　{'>'}
           </span>
           <input
             className={styles.inputName}
@@ -77,7 +77,7 @@ const Profile = memo(({ user, profile, SubmitProfileHandle }) => {
           {!loading && (
             <img
               className={styles.image}
-              src={image.imageURL || imageURL || ""}
+              src={image.imageURL || imageURL || ''}
               onClick={onClick}
               alt="profile"
             />

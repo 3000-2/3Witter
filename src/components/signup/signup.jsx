@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
-import { useHistory } from "react-router";
-import styles from "./signup.module.css";
+import React, { useEffect } from 'react';
+import { useHistory } from 'react-router';
+import styles from './signup.module.css';
 
 const Signup = ({ authService, repository }) => {
   const history = useHistory();
@@ -8,16 +8,14 @@ const Signup = ({ authService, repository }) => {
     e.preventDefault();
 
     const provider = getProvider(e.currentTarget.textContent[0]);
-    console.log(provider);
 
     authService
       .login(provider)
       .then((result) => {
-        console.log(result);
         onLogin(result.user);
       })
       .catch((error) => {
-        console.error("error : ", error);
+        console.error('error : ', error);
       });
   };
 
@@ -33,22 +31,22 @@ const Signup = ({ authService, repository }) => {
     repository.setProfile(user, () => {
       repository.saveProfile({
         uid: user.uid,
-        name: user.displayName || "",
+        name: user.displayName || '',
         email: user.email,
-        imageURL: "",
+        imageURL: '',
       });
     });
     history.push({
-      pathname: "home",
+      pathname: 'home',
     });
   };
 
   const getProvider = (provider) => {
     switch (provider) {
-      case "G":
-        return "Google";
-      case "T":
-        return "Twitter";
+      case 'G':
+        return 'Google';
+      case 'T':
+        return 'Twitter';
       default:
     }
   };

@@ -1,9 +1,9 @@
-import React, { memo } from "react";
-import Swal from "sweetalert2";
-import { faHeart, faCut } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { memo } from 'react';
+import Swal from 'sweetalert2';
+import { faHeart, faCut } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import styles from "./twit.module.css";
+import styles from './twit.module.css';
 
 const Twit = memo(
   ({
@@ -16,18 +16,18 @@ const Twit = memo(
     DetailImgHandle,
   }) => {
     if (!profile[twit.uid]) {
-      return "로딩중...";
+      return '로딩중...';
     }
     const { text, favor = {} } = twit;
     const { name, email, uid, imageURL } = profile[twit.uid];
     const onDelete = () => {
       Swal.fire({
-        title: "삭제할까요?",
+        title: '삭제할까요?',
         showCancelButton: true,
-        cancelButtonText: "아니요!",
-        cancelButtonColor: "#ddd",
-        confirmButtonText: "네!",
-        confirmButtonColor: "#EEC7C6",
+        cancelButtonText: '아니요!',
+        cancelButtonColor: '#ddd',
+        confirmButtonText: '네!',
+        confirmButtonColor: '#EEC7C6',
       }).then((result) => {
         if (result.value) {
           DeleteHandle(twit);
@@ -52,7 +52,6 @@ const Twit = memo(
 
     const onDetail = (e) => {
       const img = e.target.src;
-      console.log(img);
       DetailImgHandle(img);
     };
 
@@ -61,7 +60,7 @@ const Twit = memo(
         <div className={styles.profile}>
           <img
             className={styles.profileImg}
-            src={imageURL || "/images/logo.png"}
+            src={imageURL || '/images/logo.png'}
             alt="img"
             onClick={onDetail}
           />
@@ -108,7 +107,7 @@ const getStyle = (done) => {
   if (done[0] !== undefined) {
     return styles.on;
   } else {
-    return "";
+    return '';
   }
 };
 

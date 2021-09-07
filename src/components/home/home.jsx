@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router";
-import Swal from "sweetalert2";
+import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router';
+import Swal from 'sweetalert2';
 
-import Main from "../main/main";
-import Profile from "../profile/profile";
-import styles from "./home.module.css";
-import Header from "../header/header";
-import Userlist from "../userlist/userlist";
-import Favorite from "../favorite/favorite";
+import Main from '../main/main';
+import Profile from '../profile/profile';
+import styles from './home.module.css';
+import Header from '../header/header';
+import Userlist from '../userlist/userlist';
+import Favorite from '../favorite/favorite';
 
 const Home = ({ authService, repository }) => {
   const history = useHistory();
-  const [page, setPage] = useState("Main");
+  const [page, setPage] = useState('Main');
   const [user, setUser] = useState({});
   const [profile, setProfile] = useState({});
   const [twit, setTwit] = useState();
@@ -21,25 +21,25 @@ const Home = ({ authService, repository }) => {
     const page = e.currentTarget.textContent;
     e.preventDefault();
     switch (page) {
-      case "프로필":
-        setPage("Profile");
+      case '프로필':
+        setPage('Profile');
         break;
-      case "좋아요":
-        setPage("Favorite");
+      case '좋아요':
+        setPage('Favorite');
         break;
       default:
-        setPage("Main");
+        setPage('Main');
     }
   };
 
   const LogoutHandle = () => {
     Swal.fire({
-      title: "로그아웃할까요?",
+      title: '로그아웃할까요?',
       showCancelButton: true,
-      cancelButtonText: "아니요!",
-      cancelButtonColor: "#ddd",
-      confirmButtonText: "네!",
-      confirmButtonColor: "#EEC7C6",
+      cancelButtonText: '아니요!',
+      cancelButtonColor: '#ddd',
+      confirmButtonText: '네!',
+      confirmButtonColor: '#EEC7C6',
     }).then((result) => {
       if (result.value) {
         authService.logout();
@@ -88,7 +88,7 @@ const Home = ({ authService, repository }) => {
       if (user) {
         setUser(user);
       } else {
-        history.push("/");
+        history.push('/');
       }
     });
   }, [authService]);
@@ -96,13 +96,12 @@ const Home = ({ authService, repository }) => {
   useEffect(() => {
     SyncProfile();
     SyncTwit();
-  }, []);
+  }, [repository]);
 
   const SyncTwit = () => {
     const stopSync = repository.syncAllTwit((Twit) => {
       const updated = {};
       const sorted = {};
-
       // 데이터 정리
       Object.values(Twit).forEach((values) => {
         Object.keys(values).forEach((key) => {
@@ -128,23 +127,22 @@ const Home = ({ authService, repository }) => {
       Object.keys(Profile).forEach((key) => {
         updatedProfile[Profile[key].profile.uid] = { ...Profile[key].profile };
       });
-      // console.log(updatedProfile);
       setProfile(updatedProfile);
     });
     return () => stopSync();
   };
 
   const GoHome = () => {
-    history.push("/");
+    history.push('/');
   };
 
   const DetailImgHandle = (img) => {
     Swal.fire({
-      imageUrl: img || "",
+      imageUrl: img || '',
       imageWidth: 300,
-      imageAlt: "Detail",
-      confirmButtonText: "그만 볼래요!",
-      confirmButtonColor: "#EEC7C6",
+      imageAlt: 'Detail',
+      confirmButtonText: '그만 볼래요!',
+      confirmButtonColor: '#EEC7C6',
     });
   };
 
@@ -158,7 +156,7 @@ const Home = ({ authService, repository }) => {
         ChangePageHandle={ChangePageHandle}
       />
       <div className={styles.main}>
-        {page === "Main" && (
+        {page === 'Main' && (
           <Main
             user={user}
             twit={twit}
@@ -170,14 +168,14 @@ const Home = ({ authService, repository }) => {
             DetailImgHandle={DetailImgHandle}
           />
         )}
-        {page === "Profile" && (
+        {page === 'Profile' && (
           <Profile
             user={user}
             profile={profile}
             SubmitProfileHandle={SubmitProfileHandle}
           />
         )}
-        {page === "Favorite" && (
+        {page === 'Favorite' && (
           <Favorite
             user={user}
             twit={twit}

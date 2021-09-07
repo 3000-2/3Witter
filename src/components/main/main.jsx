@@ -1,8 +1,8 @@
-import React from "react";
-import Twit from "../twit/twit";
-import Mytwit from "../twit/mytwit";
-import Mheader from "../header/mheader";
-import styles from "./main.module.css";
+import React from 'react';
+import Twit from '../twit/twit';
+import Mytwit from '../twit/mytwit';
+import Mheader from '../header/mheader';
+import styles from './main.module.css';
 
 const Main = ({
   user,
